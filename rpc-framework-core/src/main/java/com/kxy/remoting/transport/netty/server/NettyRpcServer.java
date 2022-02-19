@@ -1,5 +1,6 @@
 package com.kxy.remoting.transport.netty.server;
 
+import com.kxy.config.RpcServiceConfig;
 import com.kxy.config.ShutdownHook;
 import com.kxy.factory.SingletonFactory;
 import com.kxy.provider.ServiceProvider;
@@ -29,6 +30,10 @@ public class NettyRpcServer {
     private static final int PORT = 9998;
 
     private final ServiceProvider serviceProvider = SingletonFactory.getInstance(ZkServiceProviderImpl.class);
+
+    public void registerService(RpcServiceConfig rpcServiceConfig) {
+        serviceProvider.publishService(rpcServiceConfig);
+    }
 
     @SneakyThrows
     public void start() {
